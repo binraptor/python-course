@@ -104,3 +104,72 @@ Display the project history:
 .. code-block:: bash
 
 	$ git log
+
+**5. Merge the first_branch back into your master branch.**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Show the working tree status:
+
+.. code-block:: bash
+
+	$ git log --oneline --graph --decorate=short --all
+
+Merge the changes made to the first_branch on top of master, and resolve merger conflicts:
+
+.. code-block:: bash
+
+	$ git merge first_branch
+	$ nano lab0/README.rst
+	$ git add lab0/README.rst
+	$ git commit -m "feat(lab0): merge branch 'first_branch'"
+
+Show the working tree status:
+
+.. code-block:: bash
+
+	$ git log --oneline --graph --decorate=short --all
+
+Display the project history:
+
+.. code-block:: bash
+
+	$ git log
+
+Modify the README.md: add a list of commands to solve 3rd and 4th subtasks:
+
+.. code-block:: bash
+
+	$ nano lab0/README.rst
+	$ git add lab0/README.rst
+
+Commit all changes:
+
+.. code-block:: bash
+
+	$ git commit -m "feat(lab0): update README.rst"
+
+Display the project history:
+
+.. code-block:: bash
+
+	git log
+
+**6. Publish to your repository.**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create a new empty repository on GitHub.
+Do not initialize it with files.
+
+Add your repository as a remote to your local git repo:
+
+.. code-block:: bash
+
+	$ git remote add origin https://github.com/binraptor/python-course.git
+
+Push two local branches to your remote repository:
+
+.. code-block:: bash
+
+	$ git push origin master first_branch
+
+Check the GitHub, that your remote repository looks as expected.
