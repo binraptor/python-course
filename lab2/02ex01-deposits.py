@@ -63,7 +63,8 @@ def main(args):
     # ...
 
     res = deposit(initial_sum, percent, fixed_period, set_period)
-    print(res)
+    percent_yield = ((res / initial_sum) - 1) * 100
+    print(f"{res:.2f} (+{percent_yield:.2f}%)")
 
     print('\nOther periods:\n')
 
@@ -73,7 +74,8 @@ def main(args):
     periods = [1, 5, 10]
     for set_period in periods:
         res = deposit(initial_sum, percent, fixed_period, set_period)
-        print(f"Yield for {set_period} years: {res:.2f}")
+        percent_yield = ((res / initial_sum) - 1) * 100
+        print(f"Yield for {set_period} years: {res:.2f} (+{percent_yield:.2f}%)")
 
 
 if __name__ == '__main__':
