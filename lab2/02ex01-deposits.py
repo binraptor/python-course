@@ -65,6 +65,16 @@ def main(args):
     res = deposit(initial_sum, percent, fixed_period, set_period)
     print(res)
 
+    print('\nOther periods:\n')
+
+    res = deposit(initial_sum, percent, fixed_period, 1 / 12)
+    print(f"Yield for 1 month: {res:.2f}\n")
+
+    periods = [1, 5, 10]
+    for set_period in periods:
+        res = deposit(initial_sum, percent, fixed_period, set_period)
+        print(f"Yield for {set_period} years: {res:.2f}")
+
 
 if __name__ == '__main__':
     import sys
