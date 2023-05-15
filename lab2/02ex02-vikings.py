@@ -7,6 +7,7 @@ https://www.youtube.com/watch?v=zLih-WQwBSc
 """
 
 import random
+import datetime
 
 DEF_CHOICE = 8      # how many times to repeat a dish
 MENU = ['spam', 'egg', 'sausage', 'bacon']  # that's all combinations
@@ -46,6 +47,7 @@ def dialog(num_choice=DEF_CHOICE):
             # user asked for what's on menu - compliment
             print(D_GOOD.format(dishes=entry))
             print(f'Vikings: "{SONG}"')
+        order_history(entry)
         return
 
     if not words:
@@ -70,6 +72,12 @@ def get_dishes(number):
     res = res[:-1]      # remove last element
     
     return ''.join(res)
+
+
+def order_history(order):
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open('order_history.txt', 'a') as f:
+        f.write(current_time + ' ' + order + '\n')
 
 
 TIP = """Next time call "{script} num" to set number of dishes."""
