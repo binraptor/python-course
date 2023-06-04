@@ -28,6 +28,34 @@ class Person(Human):
 #       - anything other you want to extend here
 
 
+class Vaccine:
+    def __init__(self, name):
+        self.name = name
+
+    def __repr__(self):
+        cls = self.__class__.__name__
+        return f'{cls}(name={self.name!r})'
+
+
+class GenericChip:
+    def __init__(self, code):
+        self.code = code
+
+    def __repr__(self):
+        cls = self.__class__.__name__
+        return f'{cls}(code={self.code!r})'
+
+
+class AnimalIDChip(GenericChip):
+    def __init__(self, code, manufacturer):
+        super().__init__(code)
+        self.manufacturer = manufacturer
+
+    def __repr__(self):
+        cls = self.__class__.__name__
+        return f'{cls}(code={self.code!r}, manufacturer={self.manufacturer!r})'
+
+
 class Enterprise:
     def __init__(self, name, owner):
         self.name = name
@@ -57,6 +85,8 @@ class Pet(Animal):
     def __init__(self, owner):
         """Set owner at instantiation."""
         self.change_owner(owner)
+        self.vaccine = None
+        self.chip = None
 
     def change_owner(self, new_owner):
         """Called to transfer ownership or set a new owner."""
@@ -87,18 +117,27 @@ class Pet(Animal):
 
     def __repr__(self):
         clsname = self.__class__.__name__
-        return f'{clsname}(owner={self.owner!r})'
+        return f'{clsname}(owner={self.owner!r}, vaccine={self.vaccine!r}, chip={self.chip!r})'
+
 
 def main(args):
     person = Person(name='John Doe', tax_number='123456789')
     enterprise = Enterprise(name='ABC Inc.', owner=person)
     pet = Pet(owner=enterprise)
 
+    vaccine = Vaccine(name='Good')
+    pet.vaccine = vaccine
+
+    chip = AnimalIDChip(code='ABCDE', manufacturer='Chip Company')
+    pet.chip = chip
+
     enterprise.add_pet(pet)
 
     print(person)
     print(enterprise)
     print(pet)
+    print(pet.vaccine)
+    print(pet.chip)
 
 if __name__ == '__main__':
     import sys
