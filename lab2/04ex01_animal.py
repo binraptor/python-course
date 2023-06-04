@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 class Animal:
     def __repr__(self):
         return f'{self.__class__.__name__}()'
@@ -8,12 +10,13 @@ class Human(Animal):
 
 
 class Person(Human):
-    def __init__(self, name):
+    def __init__(self, name, tax_number):
         self.name = name
+        self.tax_number = tax_number
 
     def __repr__(self):
         cls = self.__class__.__name__
-        return f'{cls}(name={self.name!r})'
+        return f'{cls}(name={self.name!r}, tax_number={self.tax_number!r})'
 
 
 # TODO: fill classes above with the required logic
@@ -67,6 +70,15 @@ class Pet(Animal):
         clsname = self.__class__.__name__
         return f'{clsname}(owner={self.owner!r})'
 
+def main(args):
+    person = Person(name='John Doe', tax_number='123456789')
+    pet = Pet(owner=person)
+
+    print(person)
+    print(pet)
 
 if __name__ == '__main__':
-    ...
+    import sys
+
+    main(sys.argv)
+
