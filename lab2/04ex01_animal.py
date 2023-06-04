@@ -28,6 +28,25 @@ class Person(Human):
 #       - anything other you want to extend here
 
 
+class Enterprise:
+    def __init__(self, name, owner):
+        self.name = name
+        self.owner = owner
+        self.pets = []
+
+    def add_pet(self, pet):
+        self.pets.append(pet)
+        pet.change_owner(self)
+
+    def remove_pet(self, pet):
+        self.pets.remove(pet)
+        pet.change_owner(None)
+
+    def __repr__(self):
+        clsname = self.__class__.__name__
+        return f'{clsname}(name={self.name!r}, owner={self.owner!r}, pets={self.pets!r})'
+
+
 class Pet(Animal):
     """Abstracts an animal with an owner and name.
 
@@ -59,7 +78,7 @@ class Pet(Animal):
         Called at dog.owner = value
         """
         # do some checks here
-        if isinstance(value, Person):
+        if isinstance(value, (Person, Enterprise)):
             self.__owner = value
         else:
             err = f'{value!r} must be an instance'
@@ -72,9 +91,13 @@ class Pet(Animal):
 
 def main(args):
     person = Person(name='John Doe', tax_number='123456789')
-    pet = Pet(owner=person)
+    enterprise = Enterprise(name='ABC Inc.', owner=person)
+    pet = Pet(owner=enterprise)
+
+    enterprise.add_pet(pet)
 
     print(person)
+    print(enterprise)
     print(pet)
 
 if __name__ == '__main__':
