@@ -1,5 +1,8 @@
+#!/usr/bin/env python3
+
 import itertools
 from enum import Enum
+import random
 
 _ranks = [6, 7, 8, 9, 10, 'J', 'Q', 'K', 'A']
 # or  ranks = list(range(6, 10 + 1)) + list('JQKA')
@@ -37,14 +40,21 @@ class Card:
 ##        print(f'{r} : {s}')
 
 
-class CardDeckBase:
-    #cards = [Card(rank, suit) for rank, suit in
-    pass
+class CardDeck:
+    def __init__(self):
+        self.cards = [Card(rank, suit) for rank in _ranks for suit in Suit]
 
+    def shuffle(self):
+        random.shuffle(self.cards)
 
-class FrenchDeck(CardDeckBase):
-    ...
+    def draw(self, n):
+        if n <= 0:
+            raise ValueError("Number of cards to draw must be positive.")
+        if n > len(self.cards):
+            raise ValueError("Not enough cards in the deck.")
 
+        drawn_cards = self.cards[:n]
+        self.cards = self.cards[n:]
 
-if __name__ == '__main__':
-    ...
+        return drawn_cards
+
